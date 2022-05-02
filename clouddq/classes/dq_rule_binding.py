@@ -288,12 +288,13 @@ class DqRuleBinding:
                     incremental_time_filter_column_config.get_column_type_value()
                 )
                 if incremental_time_filter_column_type not in ("TIMESTAMP", "DATETIME"):
-                    raise ValueError(
+                    logger.info(
                         f"incremental_time_filter_column_id: "
                         f"{self.incremental_time_filter_column_id} "
                         f"must have type TIMESTAMP or DATETIME.\n"
                         f"Current type: {incremental_time_filter_column_type}."
                     )
+                    incremental_time_filter_column_type = "TIMESTAMP"
                 incremental_time_filter_column = dict(
                     incremental_time_filter_column_config.dict_values()
                 ).get("name")
